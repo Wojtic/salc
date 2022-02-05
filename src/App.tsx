@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
+
+const NavItem = (props: any) => {
+  return (
+    <li className="flex-2 hover:bg-blue-400 transition-colors">
+      <Link to={props.to} className="text-center block py-3 px-4">
+        {props.text}
+      </Link>
+    </li>
+  );
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav className="h-12 bg-blue-300">
+        <ul className="flex justify-end">
+          <NavItem to="/tests" text="Testy" />
+          <NavItem to="/notes" text="Poznámky" />
+        </ul>
+      </nav>
+      <Outlet />
     </div>
   );
 }
