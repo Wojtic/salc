@@ -15,7 +15,10 @@ function App() {
   return (
     <div className="App">
       <nav className="h-12 bg-blue-300">
-        <ul className="flex justify-end">
+        <div className="h-full w-20 text-center text-xl leading-[3rem]">
+          <a href="/">Salc</a>
+        </div>
+        <ul className="flex justify-end top-0 absolute right-0">
           <NavItem to="/tests" text="Testy" />
           <NavItem to="/notes" text="Poznámky" />
         </ul>
