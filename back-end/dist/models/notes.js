@@ -9,7 +9,7 @@ const noteSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
-    collection: {
+    owner_Collection: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         required: true,
     },

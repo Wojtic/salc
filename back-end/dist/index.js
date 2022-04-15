@@ -38,6 +38,8 @@ app.use(passport.session());
 // ----------------------------------------------------- routes
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
+const notes = require("./routes/notes");
+app.use("/api/notes", notes);
 app.get("/", (req, res) => {
     res.send("Hi!");
 });
