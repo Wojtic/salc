@@ -1,25 +1,50 @@
 // tslint:disable:no-console
+// tslint:disable:no-var-requires
 import express from "express";
-import { ConnectOptions, MongoClient } from "mongodb";
+import session from "express-session";
+const MongoStore = require("connect-mongo");
+
 const app = express();
-const port = 8080;
+const port = 3000;
 
-const DBclient = new MongoClient(
-  "mongodb://localhost:27017/?maxPoolSize=20&w=majority",
-  { useUnifiedTopology: true } as ConnectOptions
-);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-DBclient.connect()
-  .then(async (client) => {
-    console.log("Connected successfully to DB server");
+// ----------------------------------------------------- database connection and setup
+import mongoose from "mongoose";
+const URI = "mongodb://localhost:27017/salc";
+mongoose.connect(URI);
+const mongoDb = mongoose.connection;
 
-    const db = DBclient.db("salc");
-    const users = db.collection("users");
+mongoDb.on("error", () => {
+  console.error(`Unable to connect to database.`);
+});
 
-    app.listen(port, () => {
-      console.log(`server started at http://localhost:${port}`);
-    });
+mongoDb.on("open", () => {
+  console.log(`Connected to database.`);
+});
 
-    DBclient.close();
+const User = require("./models/users");
+// ------------------------------------------- session
+app.use(
+  session({
+    secret: "neco velmi tajneho",
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: URI }),
   })
-  .catch(console.error);
+);
+// ----------------------------------------------------- passport setup
+const passport = require("./passport-config");
+app.use(passport.initialize());
+app.use(passport.session());
+
+// ----------------------------------------------------- routes
+const auth = require("./routes/auth");
+app.use("/api/auth", auth);
+
+app.get("/", (req, res) => {
+  res.send("Hi!");
+});
+
+app.listen(port, () => console.log(`Express running on port ${port}`));
