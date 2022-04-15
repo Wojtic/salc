@@ -6,12 +6,7 @@ import bcrypt from "bcrypt";
 const router = express.Router();
 const User = require("../models/users");
 
-function checkNotAuthenticated(req: any, res: any, next: any) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/");
-  }
-  return next();
-}
+import { checkNotAuthenticated } from "../utils";
 
 router.post(
   "/login",

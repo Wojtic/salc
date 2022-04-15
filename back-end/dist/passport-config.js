@@ -30,8 +30,6 @@ passport_1.default.use(new LocalStrategy({ usernameField: "email" }, (mail, pass
     try {
         const result = yield User.findOne({ email: mail });
         if (result) {
-            console.log(mail);
-            console.log(result);
             bcrypt_1.default.compare(password, result.password, (err, isMatch) => {
                 if (err)
                     throw err;

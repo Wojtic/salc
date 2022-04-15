@@ -19,13 +19,8 @@ const passport_1 = __importDefault(require("passport"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const router = express_1.default.Router();
 const User = require("../models/users");
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return res.redirect("/");
-    }
-    return next();
-}
-router.post("/login", (req, res, next) => {
+const utils_1 = require("../utils");
+router.post("/login", utils_1.checkNotAuthenticated, (req, res, next) => {
     passport_1.default.authenticate("local", (err, user, info) => {
         if (err) {
             return res.status(400).json({ errors: err });
@@ -42,7 +37,7 @@ router.post("/login", (req, res, next) => {
         });
     })(req, res, next);
 });
-router.post("/register", checkNotAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/register", utils_1.checkNotAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (req.body.username !== undefined &&
             req.body.email !== undefined &&
