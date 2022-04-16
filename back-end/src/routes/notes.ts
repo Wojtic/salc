@@ -17,7 +17,23 @@ router.delete(
   "/delete_collection",
   checkAuthenticated,
   (req: any, res: any) => {
-    res.status(200);
+    res.send(200);
+  }
+);
+
+router.post("/move_to_collection", checkAuthenticated, (req: any, res: any) => {
+  res.send(200);
+});
+
+router.get("/get_collection", checkAuthenticated, (req: any, res: any) => {
+  res.send(200);
+});
+
+router.get(
+  "/get_collection_with_notes",
+  checkAuthenticated,
+  (req: any, res: any) => {
+    res.send(200);
   }
 );
 
@@ -26,6 +42,10 @@ router.post("/create_note", checkAuthenticated, (req: any, res: any) => {
 });
 
 router.delete("/delete_note", checkAuthenticated, (req: any, res: any) => {
+  res.send(200);
+});
+
+router.get("/get_note", checkAuthenticated, (req: any, res: any) => {
   res.send(200);
 });
 
@@ -40,5 +60,17 @@ router.delete("/delete_group", checkAuthenticated, (req: any, res: any) => {
 router.post("/move_to_group", checkAuthenticated, (req: any, res: any) => {
   res.send(200);
 });
+
+router.get("/get_group", checkAuthenticated, (req: any, res: any) => {
+  res.send(200);
+});
+
+router.get(
+  "/get_group_with_notes",
+  checkAuthenticated,
+  (req: any, res: any) => {
+    res.send(200);
+  }
+);
 
 module.exports = router;
