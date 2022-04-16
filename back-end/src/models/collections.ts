@@ -6,7 +6,12 @@ const collectionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    notes: [mongoose.Schema.Types.ObjectId],
+    notes: [
+      {
+        title: String,
+        note_id: mongoose.Schema.Types.ObjectId,
+      },
+    ],
     public: {
       type: Boolean,
       default: false,

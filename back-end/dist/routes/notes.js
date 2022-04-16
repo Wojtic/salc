@@ -19,19 +19,19 @@ router.delete("/delete_collection", utils_1.checkAuthenticated, (req, res) => {
     res.status(200);
 });
 router.post("/create_note", utils_1.checkAuthenticated, (req, res) => {
-    res.status(200);
+    res.send(200);
 });
 router.delete("/delete_note", utils_1.checkAuthenticated, (req, res) => {
-    res.status(200);
+    res.send(200);
 });
 router.post("/create_group", utils_1.checkAuthenticated, (req, res) => {
-    res.status(200);
+    res.send(200);
 });
 router.delete("/delete_group", utils_1.checkAuthenticated, (req, res) => {
-    res.status(200);
+    res.send(200);
 });
 router.post("/move_to_group", utils_1.checkAuthenticated, (req, res) => {
-    res.status(200);
+    res.send(200);
 });
 module.exports = router;
 //# sourceMappingURL=notes.js.map

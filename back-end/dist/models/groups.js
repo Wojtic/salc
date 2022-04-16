@@ -13,9 +13,12 @@ const groupSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Schema.Types.ObjectId,
         required: true,
     },
-    notes: {
-        type: [mongoose_1.default.Schema.Types.ObjectId],
-    },
+    notes: [
+        {
+            title: String,
+            note_id: mongoose_1.default.Schema.Types.ObjectId,
+        },
+    ],
     public: {
         type: Boolean,
         default: false,
