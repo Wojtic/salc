@@ -16,40 +16,45 @@ router.post("/create_collection", utils_1.checkAuthenticated, (req, res) => {
     res.status(200);
 });
 router.delete("/delete_collection", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.post("/move_to_collection", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.get("/get_collection", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.get("/get_collection_with_notes", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.post("/create_note", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    if ((req.body.noteURL === undefined && req.body.noteContents === undefined) ||
+        req.body.noteTitle === undefined ||
+        req.body.noteCollection === undefined) {
+        return res.status(400).json({ message: "Missing arguments" });
+    }
+    res.sendStatus(200);
 });
 router.delete("/delete_note", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.get("/get_note", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.post("/create_group", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.delete("/delete_group", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.post("/move_to_group", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.get("/get_group", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 router.get("/get_group_with_notes", utils_1.checkAuthenticated, (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 });
 module.exports = router;
 //# sourceMappingURL=notes.js.map

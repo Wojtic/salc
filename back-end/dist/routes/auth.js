@@ -30,7 +30,6 @@ router.post("/login", utils_1.checkNotAuthenticated, (req, res, next) => {
         }
         req.logIn(user, (er) => {
             if (er) {
-                console.log(er);
                 return res.status(400).json({ errors: er });
             }
             return res.status(200).json({ success: `logged in ${user.id}` });
@@ -39,28 +38,25 @@ router.post("/login", utils_1.checkNotAuthenticated, (req, res, next) => {
 });
 router.post("/register", utils_1.checkNotAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (req.body.username !== undefined &&
-            req.body.email !== undefined &&
-            req.body.password !== undefined) {
-            const result = yield User.findOne({ email: req.body.email });
-            if (result) {
-                return res.redirect("/login");
-            }
-            const hashedPwd = yield bcrypt_1.default.hash(req.body.password, 10);
-            const newUser = new User({
-                username: req.body.username,
-                email: req.body.email,
-                password: hashedPwd,
-            });
-            newUser.save((err) => {
-                if (err)
-                    throw err;
-                res.status(200).redirect("/login");
-            });
+        if (req.body.username == undefined ||
+            req.body.email == undefined ||
+            req.body.password == undefined) {
+            return res.status(400).json({ message: "Missing credentials" });
         }
-        else {
-            res.status(400).json({ message: "Missing credentials" });
-        }
+        const result = yield User.findOne({ email: req.body.email });
+        if (result)
+            return res.status(200);
+        const hashedPwd = yield bcrypt_1.default.hash(req.body.password, 10);
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: hashedPwd,
+        });
+        newUser.save((err) => {
+            if (err)
+                throw err;
+            res.status(200);
+        });
     }
     catch (ex) {
         res.status(400);

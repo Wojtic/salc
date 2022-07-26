@@ -12,7 +12,7 @@ function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    return res.redirect("/login");
+    return res.status(401);
 }
 exports.checkAuthenticated = checkAuthenticated;
 //# sourceMappingURL=utils.js.map
