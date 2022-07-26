@@ -46,7 +46,17 @@ router.post("/create_note", checkAuthenticated, (req: any, res: any) => {
     return res.status(400).json({ message: "Missing arguments" });
   }
 
-  res.sendStatus(200);
+  const newNote = new Note({
+    title: req.body.noteTitle,
+    owner_Collection: req.body.noteCollection,
+    link: req.body.noteURL,
+    contents: req.body.noteContents,
+  });
+
+  newNote.save((err: Error) => {
+    if (err) return res.sendStatus(400);
+    res.sendStatus(200);
+  });
 });
 
 router.delete("/delete_note", checkAuthenticated, (req: any, res: any) => {
